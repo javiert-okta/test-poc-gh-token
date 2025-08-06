@@ -1,0 +1,20 @@
+name: Test
+on: push
+permissions: 
+  contents: write
+
+jobs: 
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@4
+      - name: Create file
+        run: echo $(date) > date.txt
+      - name: Set up Git
+        run: | 
+          git config --global user.name 'javier-okta'
+          git config --global user.email 'javiersebastian.tinocomachado@okta.com'
+      - name: Commit to repo
+        run: |
+          git commit -am 'test commit'
+          git push
